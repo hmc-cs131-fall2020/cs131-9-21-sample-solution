@@ -1,0 +1,74 @@
+%!
+                % ^-- do not change this line!
+%%%
+% Setup code
+%
+% The goal here is to create a sensible drawing environment.  Specifically,
+% we set up the coordinate system to be in inches (rather than points), and
+% set the drawing color to black, etc.
+%
+% YOU CAN MOSTLY IGNORE THIS CODE AND SKIP AHEAD TO THE DRAWING CODE!
+%
+%%%
+
+72 72 scale           % Tell PostScript to measure units in inches
+                      % i.e., internally it works with points (1/72 inch)
+	                    % but this says to multiply all distances
+	                    % given by the user by 72 (e.g., translate from
+	                    % inches to points)
+
+/Times-Roman findfont       % Font = Times-Roman
+10 72 div scalefont setfont % Fontsize = 10pt = 10/72 in.
+
+0.01 setlinewidth           % Narrow lines
+0 setgray		    % Draw things in black (0 = black, 1 = white)
+
+%%%
+% Picture-drawing code
+%
+% This is where we'll run our drawing code to draw a picture.  The provided
+% code exists to show you a little about how PostScript works.  You can and
+% should (eventually) remove it and replace it with your own masterpiece.
+%
+% Note (0,0) is bottom lefthand corner of the page; the top right corner
+% of the page is (8.5,11)
+%%%
+		 
+
+% Draw a line:
+
+newpath                 % Start a new path
+5 5 moveto              % Start of our line (roughly mid page)
+1 1 rlineto             % Make a line (using relative positioning)
+stroke                  % Draw it (i.e., draw the line)
+
+
+% Draw a square
+
+newpath                 % Start a new path
+3 3 moveto              % Origin of our square, the first corner
+3 4 lineto              % Add line to second corner (absolute positioning)
+4 4 lineto              % Add line to third corner
+4 3 lineto              % Add line to fourth corner
+closepath               % Add a line connecting back to our starting point
+fill                    % Fill the square (i.e., fill the interior of the lines)
+
+
+% Draw a (partial) circle
+
+newpath
+5 5                     % Origin of the circle
+0.25                    % Radius
+0 180                   % Starting and ending points of the circle (in degrees)
+arc                     % Draw the arc
+closepath               % Link back to the starting point
+stroke                  % Draw it
+
+
+% Display text
+
+6 1 moveto              % Bottom left corner of text starting point
+(Hello World!) show     % Draw the text
+		
+			 
+showpage                % Done with the page. 
