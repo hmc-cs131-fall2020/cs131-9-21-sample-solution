@@ -34,41 +34,85 @@
 % of the page is (8.5,11)
 %%%
 		 
-
-% Draw a line:
-
-newpath                 % Start a new path
-5 5 moveto              % Start of our line (roughly mid page)
-1 1 rlineto             % Make a line (using relative positioning)
-stroke                  % Draw it (i.e., draw the line)
-
-
-% Draw a square
-
-newpath                 % Start a new path
-3 3 moveto              % Origin of our square, the first corner
-3 4 lineto              % Add line to second corner (absolute positioning)
-4 4 lineto              % Add line to third corner
-4 3 lineto              % Add line to fourth corner
-closepath               % Add a line connecting back to our starting point
-fill                    % Fill the square (i.e., fill the interior of the lines)
+/person {
+	% Head
+	newpath
+		0.0 0.0              % Middle of the head
+		0.15                 % Radius
+		0 360                % Starting and ending points of the circle (in degrees)
+		arc                  % Draw the arc
+		closepath            % Link back to the starting point
+	stroke                  
 
 
-% Draw a (partial) circle
-
-newpath
-5 5                     % Origin of the circle
-0.25                    % Radius
-0 180                   % Starting and ending points of the circle (in degrees)
-arc                     % Draw the arc
-closepath               % Link back to the starting point
-stroke                  % Draw it
+	% Torso:
+	newpath                 
+		0 -0.15 moveto       % Start of torso (radius below the origin of head)
+		0 -0.35 rlineto      % Torso is .35 long
+	stroke                  
 
 
-% Display text
+	% Left arm:
+	newpath                 
+		0 -0.30 moveto       % Start of arm (a little below the head)
+		-0.1 0.1 rlineto     % Arm is .1 long
+	stroke
 
-6 1 moveto              % Bottom left corner of text starting point
-(Hello World!) show     % Draw the text
-		
-			 
-showpage                % Done with the page. 
+
+	% Right arm:
+	newpath                 
+		0 -0.30 moveto       % Start of arm (a little below the head)
+		0.1 0.1 rlineto      % Arm is .1 long
+	stroke
+
+
+	% Left leg:
+	newpath                 
+		0 -0.50 moveto       % Start of leg (at bottom of torso)
+		-0.15 -0.15 rlineto  % Leg is .15 long
+	stroke                  
+
+
+	% Right leg:
+	newpath                 
+		0 -0.50 moveto       % Start of leg (at bottom of torso)
+		0.15 -0.15 rlineto   % Leg is .15 long
+	stroke                  
+} def 
+
+/people1 {
+gsave
+	4.25 5.5 translate person
+	grestore
+
+	gsave
+		90 rotate 5.8 -4.55 translate person
+	grestore
+
+	gsave
+		180 rotate -4.25 -6.1 translate person
+	grestore
+
+	gsave
+		270 rotate -5.8 3.95 translate person
+	grestore
+} def
+
+/people2 {
+	.5 .5 scale
+	people1
+	gsave
+		0.0 11 translate people1
+	grestore
+	gsave
+		8.5 11 translate people1
+	grestore
+	gsave
+		8.5 0.0 translate people1
+	grestore
+} def
+
+people1
+people2
+
+showpage        % Done with the page. 

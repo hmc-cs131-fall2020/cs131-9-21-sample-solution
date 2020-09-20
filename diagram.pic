@@ -1,5 +1,12 @@
-circle "User" "input"; 
-arrow "steps 1" right "and 2";
-box "Magic" "happens"; 
-arrow "step 3" right down; 
-box "Output";
+arrow "Source" "Code";
+box "Lexer";
+arrow right "Tokens" "";
+box "Parser";
+arrow "Syntax" "Trees" right right;
+circle "Type" "Checker";
+arrow right down;
+box "Translator";
+arrow "Intermediate" "Code";
+box "Optimizer";
+arrow down left;
+box "Assembly" "Generator";
